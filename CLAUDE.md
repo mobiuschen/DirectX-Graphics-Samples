@@ -22,6 +22,7 @@ msbuild Samples\Desktop\D3D12HelloWorld\src\D3D12HelloWorld.sln /p:Configuration
 ## Repository Layout
 
 - `Samples/Desktop/` — ~24 standalone D3D12 samples; each is self-contained with its own `.sln`
+- `Samples/RealTimeRendering/` — MiniEngine-based real-time rendering technique demos (e.g. `RTRLightPropagationVolumes`); each subfolder has its own `src/<Name>.sln` referencing `MiniEngine/Core` + `MiniEngine/Model`
 - `Libraries/` — Shared code: D3DX12 helpers, D3DX12Residency, D3DX12AffinityLayer (multi-GPU), D3D12RaytracingFallback
 - `MiniEngine/` — Full engine starter kit (Core lib + ModelViewer app + asset converter)
 - `Packages/` — Vendored NuGet packages (DirectXMesh, DirectXTex, D3D12 headers, DXC)
