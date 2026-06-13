@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>
+    </LinkIncremental>
+    <PostBuildEventUseInBuild>
+    </PostBuildEventUseInBuild>
+    <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PostBuildEventUseInBuild>
+    </PostBuildEventUseInBuild>
+    <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
+    <PostBuildEventUseInBuild>
+    </PostBuildEventUseInBuild>
+    <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Profile|x64">
+      <Configuration>Profile</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B7A3F9C2-1E4D-4A8B-9C6F-2D5E8A1B3C7D}</ProjectGuid>
+    <ApplicationEnvironment>title</ApplicationEnvironment>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>RTRLightPropagationVolumes</ProjectName>
+    <RootNamespace>RTRLightPropagationVolumes</RootNamespace>
+    <PlatformToolset>v143</PlatformToolset>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <TargetRuntime>Native</TargetRuntime>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project=".\Build.props" />
+    <Import Project=".\Desktop.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <!-- Sponza .h3d + textures live under MiniEngine\ModelViewer\Sponza; run with
+       that as the working directory so "Sponza/sponza.h3d" resolves. -->
+  <PropertyGroup>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)..\..\..\..\MiniEngine\ModelViewer\</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\;..\..\..\..\MiniEngine\Core;..\..\..\..\MiniEngine\Model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link Condition="'$(Configuration)'=='Debug'">
+      <AdditionalOptions>/nodefaultlib:MSVCRT %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
+    <Link>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;runtimeobject.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)
+	  </AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="RTRLightPropagationVolumes.cpp" />
+    <ClCompile Include="VolumeColorBuffer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LPVConstants.h" />
+    <ClInclude Include="VolumeColorBuffer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\MiniEngine\ModelViewer\Sponza\sponza.h3d">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="nuget.config" />
+    <None Include="packages.config" />
+    <None Include="readme.md" />
+    <None Include="LPVCommon.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="RSMVS.hlsl">
+      <ShaderType>Vertex</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="RSMPS.hlsl">
+      <ShaderType>Pixel</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="AlbedoVS.hlsl">
+      <ShaderType>Vertex</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="AlbedoPS.hlsl">
+      <ShaderType>Pixel</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="InjectVS.hlsl">
+      <ShaderType>Vertex</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="InjectGS.hlsl">
+      <ShaderType>Geometry</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="InjectPS.hlsl">
+      <ShaderType>Pixel</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="GVInjectVS.hlsl">
+      <ShaderType>Vertex</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="GVInjectGS.hlsl">
+      <ShaderType>Geometry</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="GVInjectPS.hlsl">
+      <ShaderType>Pixel</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="PropagateCS.hlsl">
+      <ShaderType>Compute</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="CompositeVS.hlsl">
+      <ShaderType>Vertex</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="CompositePS.hlsl">
+      <ShaderType>Pixel</ShaderType>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\MiniEngine\Core\Core.vcxproj">
+      <Project>{86a58508-0d6a-4786-a32f-01a301fdc6f3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MiniEngine\Model\Model.vcxproj">
+      <Project>{5d3aeefb-8789-48e5-9bd9-09c667052d09}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalOptions>/nodefaultlib:LIBCMT %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\..\..\Packages\WinPixEventRuntime.1.0.240308001\build\WinPixEventRuntime.targets" Condition="Exists('..\..\..\..\Packages\WinPixEventRuntime.1.0.240308001\build\WinPixEventRuntime.targets')" />
+    <Import Project="..\..\..\..\Packages\directxtex_desktop_win10.2024.10.29.1\build\native\directxtex_desktop_win10.targets" Condition="Exists('..\..\..\..\Packages\directxtex_desktop_win10.2024.10.29.1\build\native\directxtex_desktop_win10.targets')" />
+    <Import Project="..\..\..\..\Packages\directxmesh_desktop_win10.2024.10.29.1\build\native\directxmesh_desktop_win10.targets" Condition="Exists('..\..\..\..\Packages\directxmesh_desktop_win10.2024.10.29.1\build\native\directxmesh_desktop_win10.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\Packages\WinPixEventRuntime.1.0.240308001\build\WinPixEventRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\Packages\WinPixEventRuntime.1.0.240308001\build\WinPixEventRuntime.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\Packages\directxtex_desktop_win10.2024.10.29.1\build\native\directxtex_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\Packages\directxtex_desktop_win10.2024.10.29.1\build\native\directxtex_desktop_win10.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\Packages\directxmesh_desktop_win10.2024.10.29.1\build\native\directxmesh_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\Packages\directxmesh_desktop_win10.2024.10.29.1\build\native\directxmesh_desktop_win10.targets'))" />
+  </Target>
+</Project>

@@ -12,6 +12,7 @@
 **/src/bin
 **/src/obj
 **/.vs
+**/.idea
 
 *.hlsl.h
 **/Build_VS16
